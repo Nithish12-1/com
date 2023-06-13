@@ -1,0 +1,41 @@
+PROGRAM CODING: 
+ftpclient.java import java.net.*; import java.io.*; 
+public class ftpclient { 
+public static void main(String args[])throws Exception 
+{ 
+Socket sock=new Socket("127.0.0.1",3000); System.out.println("Enter the filename:"); 
+BufferedReaderkeyRead=new BufferedReader (new InputStreamReader(System.in)); String fname=keyRead.readLine(); 
+OutputStreamostream=sock.getOutputStream(); PrintWriterpwrite=new PrintWriter(ostream,true); pwrite.println(fname); 
+InputStreamistream=sock.getInputStream(); 
+BufferedReadersocketRead=new BufferedReader(new InputStreamReader(istream)); String str; 
+while((str=socketRead.readLine())!=null) 
+{ 
+System.out.println(str); 	
+} 
+pwrite.close(); socketRead.close(); keyRead.close(); 
+} 
+} 
+ftpserver.java 
+import java.io.*; import java.net.*; public class ftpserver { 
+public static void main(String args[])throws Exception 
+{ 
+ServerSocketsersock=new ServerSocket(3000); System.out.println("Server ready for connection"); Socket sock=sersock.accept(); 
+System.out.println("connection is successful and waiting for chatting"); InputStreamistream=sock.getInputStream(); 
+BufferedReaderfileRead=new BufferedReader(new InputStreamReader(istream)); String fname=fileRead.readLine(); 
+BufferedReadercontentRead=new BufferedReader (new FileReader(fname)); OutputStreamostream=sock.getOutputStream(); 
+PrintWriterpwrite=new PrintWriter(ostream,true); String str; while((str=contentRead.readLine())!=null) 
+{ 
+pwrite.println(str); 
+} 
+sock.close(); sersock.close(); pwrite.close(); fileRead.close();
+contentRead.close(); 
+} 
+} 
+OTUPUT: 
+ftpclient
+Z:\CN\FTP>java ftpclient Enter the filename: 
+ftp.txt Hello FTP 
+ftpserver
+Z:\CN\FTP>java ftpserver Server ready for connection 
+connection is successful and waiting for chatting
+
